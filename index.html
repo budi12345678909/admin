@@ -1,0 +1,19 @@
+<hr>
+<button id="resetBtn" style="background: gray; color: white; margin-top: 50px;">Admin: Alles Zurücksetzen</button>
+
+<script>
+document.getElementById("resetBtn").addEventListener("click", function() {
+    if (confirm("Möchtest du wirklich alle Stimmen löschen und neu starten?")) {
+        // 1. Clear Browser Storage
+        localStorage.clear();
+        
+        // 2. Tell Server to Clear
+        fetch("http://localhost:2000/reset", { method: "POST" })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                location.reload(); // Refresh page to re-enable buttons
+            });
+    }
+});
+</script>
